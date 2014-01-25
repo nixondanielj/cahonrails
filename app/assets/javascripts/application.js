@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-//= require_directory client/scripts
-//= require_directory client/scripts/core
-//= require_directory client/scripts/services
-//= require_directory client/scripts/controllers
+//= require_directory ./client/scripts
+//= require_directory ./client/scripts/core
+//= require_directory ./client/scripts/services
+//= require_directory ./client/scripts/controllers

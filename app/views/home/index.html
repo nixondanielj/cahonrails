@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="cah">
     <head>
         <%= javascript_include_tag "application" %>
         <%= csrf_meta_tags %>
     </head>
     <body>
-        
+        <div class="app" ng-view>
+            
+        </div>
     </body>
 </html>
