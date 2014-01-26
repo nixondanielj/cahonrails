@@ -5,6 +5,7 @@
         <%= csrf_meta_tags %>
     </head>
     <body>
+        <input type="hidden" ng-model="token" value="<%= form_authenticity_token %>" class="ng-scope">
         <div class="app" ng-view>
             
         </div>

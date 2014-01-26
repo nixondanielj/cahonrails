@@ -12,8 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require ./client/scripts/angular
-//= require_directory ./client/scripts
-//= require_directory ./client/scripts/core
-//= require_directory ./client/scripts/services
-//= require_directory ./client/scripts/controllers
+//= require ./client/angular
+//= require_directory ./client
+//= require_directory ./client/core
+//= require_directory ./client/models
+//= require_directory ./client/services
+//= require_directory ./client/controllers
