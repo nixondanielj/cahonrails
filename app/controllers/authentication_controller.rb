@@ -30,7 +30,8 @@ class AuthenticationController < ApplicationController
     
     private
     def clear_old_tokens(user_id)
-        old_tokens = Token.where user_id: user_id, active: true
+        old_tokens = Token.where user_id: user_id, active: 1
+        logger.debug "#{old_tokens.length} tokens active"
         old_tokens.each { |t|
             t.active = false
             t.save
