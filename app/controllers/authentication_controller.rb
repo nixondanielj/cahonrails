@@ -2,7 +2,7 @@ class AuthenticationController < ApplicationController
     
     def login
         logger.debug params[:isNew]
-        @user = User.find :conditions => { :email => params[:email] }
+        @user = User.find_by email: params[:email]
         if !@user.nil?
             if @user.password == params[:password]
                 clear_old_tokens @user.id
@@ -17,9 +17,11 @@ class AuthenticationController < ApplicationController
             @user.save
             create_token @user
         else
-            head :forbidden
+            head 404
         end
-        render :json => @token
+        if !@token.nil?
+            render :json => { token: @token.value }
+        end
     end
     
     def logout
@@ -28,10 +30,11 @@ class AuthenticationController < ApplicationController
     
     private
     def clear_old_tokens(user_id)
-        Token.find( :conditions => { :active => true, :user_id => user_id}).each do |t|
+        old_tokens = Token.where user_id: user_id, active: true
+        old_tokens.each { |t|
             t.active = false
             t.save
-        end
+        }
     end
     
     def create_token(user)
