@@ -16,10 +16,9 @@ class AuthenticationController < ApplicationController
             @user.email = params[:email]
             @user.save
             create_token @user
-        else
+        elsif @token.nil?
             head 404
-        end
-        if !@token.nil?
+        else
             render :json => { token: @token.value }
         end
     end
