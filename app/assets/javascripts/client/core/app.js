@@ -7,3 +7,5 @@ app.config(['$routeProvider', function($routeProvider){
             controller: 'HomeCtrl'
         });
     }]);
+
+var services = angular.module('cahServices', ['ngResource']);
