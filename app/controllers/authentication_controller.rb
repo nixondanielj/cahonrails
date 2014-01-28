@@ -24,7 +24,9 @@ class AuthenticationController < ApplicationController
     end
     
     def logout
-        
+        id = request.headers["Authentication"]
+        token = Token.find(id)
+        clear_token(token)
     end
     
     private
@@ -32,9 +34,13 @@ class AuthenticationController < ApplicationController
         old_tokens = Token.where user_id: user_id, active: 1
         logger.debug "#{old_tokens.length} tokens active"
         old_tokens.each { |t|
-            t.active = false
-            t.save
+            clear_token(t)
         }
+    end
+    
+    def clear_token(token)
+        token.active = false
+        token.save
     end
     
     def create_token(user)
