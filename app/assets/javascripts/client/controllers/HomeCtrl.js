@@ -1,8 +1,10 @@
-app.controller('HomeCtrl', ['$scope', '$http', function($scope, $http){
+app.controller('HomeCtrl', ['$scope', 'AuthService', function($scope, authService){
     $scope.loginFM = new LoginFM();
     $scope.login = function(){
-        $http.post('login', $scope.loginFM).success(function(){
+        authService.login($scope.loginFM).success(function(){
             alert('success');
+        }).error(function(data, status){
+            alert('failed ' + status);
         });
     };
     }]);

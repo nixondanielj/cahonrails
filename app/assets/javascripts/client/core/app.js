@@ -1,3 +1,5 @@
+var services = angular.module('cahServices', []);
+
 var app = angular.module('cah', ['ngRoute', 'cahServices']);
 
 app.config(['$routeProvider', function($routeProvider){
@@ -8,4 +10,4 @@ app.config(['$routeProvider', function($routeProvider){
         });
     }]);
 
-var services = angular.module('cahServices', ['ngResource']);
+
