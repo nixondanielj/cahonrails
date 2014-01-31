@@ -1,4 +1,4 @@
-var app = angular.module('cah', ['ngRoute']);
+var app = angular.module('cah', ['ngRoute', 'cahServices']);
 
 app.config(['$routeProvider', function($routeProvider){
     $routeProvider.
