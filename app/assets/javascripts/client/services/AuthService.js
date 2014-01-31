@@ -7,4 +7,4 @@ services.factory("AuthService", ['$http', function($http){
             return $http.get('/logout');
         }
     };
-    }]);
+}]);
