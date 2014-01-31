@@ -2,24 +2,25 @@ class AuthenticationController < ApplicationController
     
     def login
         logger.debug params[:isNew]
-        @user = User.find_by email: params[:email]
-        if !@user.nil?
-            if @user.password == params[:password]
-                clear_old_tokens @user.id
-                create_token @user
+        user = User.find_by email: params[:email]
+        if !user.nil?
+            if user.password == params[:password]
+                clear_old_tokens user.id
+                token = create_token user
             else
-                head :forbidden
+                return head :forbidden
             end
         elsif params[:isNew]
-            @user = User.new
-            @user.password = params[:password]
-            @user.email = params[:email]
-            @user.save
-            create_token @user
-        elsif @token.nil?
-            head 404
+            user = User.new
+            user.password = params[:password]
+            user.email = params[:email]
+            user.save
+            token = create_token user
+        end
+        if token.nil?
+            return head 404
         else
-            render :json => { token: @token.value }
+            return render :json => { token: token.value }
         end
     end
     
@@ -44,9 +45,10 @@ class AuthenticationController < ApplicationController
     end
     
     def create_token(user)
-        @token = Token.new
-        @token.value = 'faketoken'
-        @token.user = @user
-        @token.save
+        token = Token.new
+        token.value = 'faketoken'
+        token.user = user
+        token.save
+        return token
     end
 end
