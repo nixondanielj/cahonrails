@@ -25,8 +25,8 @@ class AuthenticationController < ApplicationController
     end
     
     def logout
-        id = request.headers["Authentication"]
-        token = Token.find(id)
+        value = request.headers["Authentication"]
+        token = Token.find_by value: value
         clear_token(token)
     end
     
