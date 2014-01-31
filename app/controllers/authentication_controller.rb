@@ -14,13 +14,13 @@ class AuthenticationController < ApplicationController
             user = User.new
             user.password = params[:password]
             user.email = params[:email]
-            user.save
+            user.save!
             token = create_token user
         end
         if token.nil?
             return head 404
         else
-            return render :json => { token: token.value }
+            response.headers["Authentication"] = token.value
         end
     end
     
@@ -48,7 +48,7 @@ class AuthenticationController < ApplicationController
         token = Token.new
         token.value = 'faketoken'
         token.user = user
-        token.save
+        token.save!
         return token
     end
 end
